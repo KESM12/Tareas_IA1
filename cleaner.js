@@ -46,3 +46,4 @@ window.onload = function() {
     var states = ["A", "SUCIO", "SUCIO"];
     test(states);
 };
+
