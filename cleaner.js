@@ -2,37 +2,37 @@
 // Copyright (c) 2025 Kevin Secaida
 
 function reflex_agent(location, state) {
-    if (state == "DIRTY") return "CLEAN";
-    else if (location == "A") return "RIGHT";
-    else if (location == "B") return "LEFT";
+    if (state == "DIRTY") return "LIMPIO";
+    else if (location == "A") return "DERECHA";
+    else if (location == "B") return "IZQUIERDA";
 }
 
 function test(states) {
     var location = states[0];
     var state = states[0] == "A" ? states[1] : states[2];
     var action_result = reflex_agent(location, state);
-    document.getElementById("log").innerHTML += "<br>Location: ".concat(location).concat(" | Action: ").concat(action_result);
+    document.getElementById("log").innerHTML += "<br>Location: ".concat(location).concat(" | ACCIÓN: ").concat(action_result);
 
-    if (action_result == "CLEAN") {
-        if (location == "A") states[1] = "CLEAN";
-        else if (location == "B") states[2] = "CLEAN";
-    } else if (action_result == "RIGHT") states[0] = "B";
-    else if (action_result == "LEFT") states[0] = "A";
+    if (action_result == "LIMPIO") {
+        if (location == "A") states[1] = "LIMPIO";
+        else if (location == "B") states[2] = "LIMPIO";
+    } else if (action_result == "DERECHA") states[0] = "B";
+    else if (action_result == "IZQUIERDA") states[0] = "A";
 
     // Verificar si ambos lugares están limpios
-    if (states[1] == "CLEAN" && states[2] == "CLEAN") {
-        document.getElementById("log").innerHTML += "<br>Both locations are clean. Stopping.";
+    if (states[1] == "CLEAN" && states[2] == "LIMPIO") {
+        document.getElementById("log").innerHTML += "<br>Todo esta limpio. Deteniendo.....";
         return;
     }
 
     // Ensuciar aleatoriamente uno de los lugares después de un tiempo
     setTimeout(function() {
         if (Math.random() < 0.5) {
-            states[1] = "DIRTY";
-            document.getElementById("log").innerHTML += "<br>Location A is now DIRTY.";
+            states[1] = "SUCIO";
+            document.getElementById("log").innerHTML += "<br>La posición A esta sucia.";
         } else {
             states[2] = "DIRTY";
-            document.getElementById("log").innerHTML += "<br>Location B is now DIRTY.";
+            document.getElementById("log").innerHTML += "<br>La posición B esta sucia.";
         }
         setTimeout(function() { test(states); }, 1000);
     }, 1000);
@@ -40,6 +40,6 @@ function test(states) {
 
 // Iniciar el agente con el estado inicial
 window.onload = function() {
-    var states = ["A", "DIRTY", "DIRTY"];
+    var states = ["A", "SUCIO", "SUCIO"];
     test(states);
 };
