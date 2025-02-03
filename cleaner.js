@@ -1,3 +1,5 @@
+// MIT License
+// Copyright (c) 2025 Kevin Secaida
 
 function reflex_agent(location, state) {
     if (state == "DIRTY") return "CLEAN";
@@ -32,10 +34,12 @@ function test(states) {
             states[2] = "DIRTY";
             document.getElementById("log").innerHTML += "<br>Location B is now DIRTY.";
         }
-        setTimeout(function() { test(states); }, 2000);
-    }, 2000);
+        setTimeout(function() { test(states); }, 1000);
+    }, 1000);
 }
 
 // Iniciar el agente con el estado inicial
-var states = ["A", "DIRTY", "DIRTY"];
-test(states);
+window.onload = function() {
+    var states = ["A", "DIRTY", "DIRTY"];
+    test(states);
+};
