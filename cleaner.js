@@ -14,7 +14,7 @@ function test(states) {
     var state = states[0] == "A" ? states[1] : states[2];
     var action_result = reflex_agent(location, state);
     contadorEstados++;
-    document.getElementById("log").innerHTML += "<br>Estado #".concat(contadorEstados).concat(" | Location: ").concat(location).concat(" | ACCIÓN: ").concat(action_result);
+    document.getElementById("log").innerHTML += "<br>Estado #".concat(contadorEstados).concat(" | UBICACIÓN: ").concat(location).concat(" | ACCIÓN: ").concat(action_result);
 
     if (action_result == "LIMPIO") {
         if (location == "A") states[1] = "LIMPIO";
