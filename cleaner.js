@@ -1,11 +1,7 @@
 // MIT License
 // Copyright (c) 2025 Kevin Secaida
 
-// Contador de estados
-var contadorEstados = {
-    A: 0,
-    B: 0
-};
+let contadorEstados = 0;
 
 function reflex_agent(location, state) {
     if (state == "SUCIO") return "LIMPIO";
@@ -17,25 +13,18 @@ function test(states) {
     var location = states[0];
     var state = states[0] == "A" ? states[1] : states[2];
     var action_result = reflex_agent(location, state);
-    document.getElementById("log").innerHTML += "<br>Location: ".concat(location).concat(" | ACCIÓN: ").concat(action_result);
+    contadorEstados++;
+    document.getElementById("log").innerHTML += "<br>Estado #".concat(contadorEstados).concat(" | Location: ").concat(location).concat(" | ACCIÓN: ").concat(action_result);
 
     if (action_result == "LIMPIO") {
-        if (location == "A") {
-            states[1] = "LIMPIO";
-            contadorEstados.A++; // Incrementar el contador de limpieza para A
-        } else if (location == "B") {
-            states[2] = "LIMPIO";
-            contadorEstados.B++; // Incrementar el contador de limpieza para B
-        }
+        if (location == "A") states[1] = "LIMPIO";
+        else if (location == "B") states[2] = "LIMPIO";
     } else if (action_result == "DERECHA") states[0] = "B";
     else if (action_result == "IZQUIERDA") states[0] = "A";
 
-    // Mostrar el contador de estados
-    document.getElementById("log").innerHTML += "<br>Contador de limpieza - A: " + contadorEstados.A + ", B: " + contadorEstados.B;
-
     // Verificar si ambos lugares están limpios
     if (states[1] == "LIMPIO" && states[2] == "LIMPIO") {
-        document.getElementById("log").innerHTML += "<br>Todo está limpio. Deteniendo.....";
+        document.getElementById("log").innerHTML += "<br>Todo está limpio. Deteniendo...";
         return;
     }
 
